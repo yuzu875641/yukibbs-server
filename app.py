@@ -14,6 +14,12 @@ post_order = []
 # 複数のリクエストが同時にデータにアクセスするのを防ぎます
 data_lock = threading.Lock()
 
+
+# いらないと思う
+@app.route('/', methods=['GET'])
+def index():
+    return "掲示板サーバーが起動中です！投稿一覧は /posts にアクセスしてください。"
+    
 @app.route('/posts', methods=['GET'])
 def get_posts():
     """
