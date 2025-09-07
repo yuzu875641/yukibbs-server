@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # CORSライブラリをインポート
 from datetime import datetime
 import threading
 
 app = Flask(__name__)
+CORS(app)  # アプリケーション全体でCORSを有効化
 
 # インメモリデータベースとして使用する辞書とリスト
 # posts_by_id: 投稿IDをキーとした辞書 (検索用)
@@ -14,12 +16,13 @@ post_order = []
 # 複数のリクエストが同時にデータにアクセスするのを防ぎます
 data_lock = threading.Lock()
 
-
-# いらないと思う
 @app.route('/', methods=['GET'])
 def index():
+    """
+    トップページ用のルート
+    """
     return "掲示板サーバーが起動中です！投稿一覧は /posts にアクセスしてください。"
-    
+
 @app.route('/posts', methods=['GET'])
 def get_posts():
     """
