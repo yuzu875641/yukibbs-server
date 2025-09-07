@@ -29,7 +29,8 @@ function renderPosts(posts) {
         return;
     }
 
-    posts.forEach(post => {
+    // 新しい投稿が下に来るように配列の順序を反転
+    posts.slice().reverse().forEach(post => {
         const postElement = document.createElement('div');
         postElement.classList.add('post');
         postElement.innerHTML = `
