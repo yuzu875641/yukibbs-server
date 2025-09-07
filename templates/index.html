@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuki BBS</title>
+    <link rel="stylesheet" href="{{ url_for('serve_static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Yuki BBS</h1>
+        <div class="rules">
+            <h2>ルール</h2>
+            <p>
+                以下のルールを守って利用してください：<br>
+                ・他者を誹謗中傷する内容の投稿は控えてください。<br>
+                ・個人情報やプライベートな情報を投稿しないでください。<br>
+                ・スパム投稿は禁止です。
+            </p>
+        </div>
+
+        <div class="post-form">
+            <h2>新しい投稿</h2>
+            <form action="{{ url_for('create_post') }}" method="post">
+                <input type="text" id="author-input" name="author" placeholder="名前">
+                <textarea id="message-input" name="message" placeholder="メッセージ内容"></textarea>
+                <button type="submit">投稿する</button>
+            </form>
+        </div>
+
+        <div id="posts-container">
+            <h2>投稿一覧</h2>
+            {% if not posts %}
+                <p>まだ投稿はありません。</p>
+            {% endif %}
+            {% for post in posts %}
+            <div class="post">
+                <div class="post-meta">
+                    <span>名前: {{ post.author }}</span>
+                    <span>投稿日時: {{ post.timestamp }}</span>
+                </div>
+                <div class="post-content">{{ post.message }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
