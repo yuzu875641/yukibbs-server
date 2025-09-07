@@ -6,7 +6,6 @@ import threading
 app = Flask(__name__, static_folder='static')
 CORS(app)
 
-# インメモリデータベースとして使用する辞書とリスト
 posts_by_id = {}
 post_order = []
 data_lock = threading.Lock()
